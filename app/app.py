@@ -28,7 +28,7 @@ def get_by_status(status):
 @app.route("/next_due/<count>", methods=["GET"])
 def get_next_due(count):
     items = (
-        Task.query.filter(Task.due_date != None)
+        Task.query.filter(Task.due_date != None, Task.status == "pending")
         .order_by(Task.due_date.desc())
         .limit(count)
         .all()
